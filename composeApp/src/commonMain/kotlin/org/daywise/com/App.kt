@@ -15,7 +15,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import daywise.composeapp.generated.resources.Res
 import daywise.composeapp.generated.resources.compose_multiplatform
+import io.github.alexzhirkevich.compottie.Compottie
+import io.github.alexzhirkevich.compottie.LottieCompositionSpec
+import io.github.alexzhirkevich.compottie.rememberLottieComposition
+import io.github.alexzhirkevich.compottie.rememberLottiePainter
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 @Preview
 fun App() {
@@ -28,8 +34,21 @@ fun App() {
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+//                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+//                    Text("Compose: $greeting")
+                    val composition by rememberLottieComposition {
+                        LottieCompositionSpec.JsonString(
+                            Res.readBytes("files/rain_animation.json").decodeToString()
+                        )
+                    }
+
+                    Image(
+                        painter = rememberLottiePainter(
+                            composition = composition,
+                            iterations = Compottie.IterateForever
+                        ),
+                        contentDescription = "Lottie animation"
+                    )
                 }
             }
         }
