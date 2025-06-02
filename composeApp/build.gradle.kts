@@ -46,6 +46,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.bundles.compottie)
             implementation(libs.bundles.koin)
+            implementation(project(":businessLogicShared"))
         }
     }
 }

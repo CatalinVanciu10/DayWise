@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.task.businesslogicshared.platform
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import daywise.composeapp.generated.resources.Res
@@ -26,6 +27,9 @@ fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = "Platform: ${platform()}"
+            )
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
             }
