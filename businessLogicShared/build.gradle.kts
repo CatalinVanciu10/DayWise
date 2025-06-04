@@ -91,6 +91,13 @@ kotlin {
             }
         }
 
+        val wearAppMain by creating {
+            dependsOn(commonMain.get())
+            // It can also depend on androidMain if Wear OS actuals extend/use generic Android ones
+            // dependsOn(androidMain) // Uncomment if wearApp actuals build upon androidMain actuals
+            // dependencies { /* Wear OS specific KMP dependencies */ }
+        }
+
         getByName("androidDeviceTest") {
             dependencies {
                 implementation(libs.androidx.runner)
