@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
@@ -27,23 +29,38 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "businessLogicSharedKit"
+    val xcfName = "businessLogicShared"
+    val xcfFramework = XCFramework(xcfName)
 
-    iosX64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
 
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
+    // iOS Targets
+    val iosX64 = iosX64()
+    val iosArm64 = iosArm64()
+    val iosSimulatorArm64 = iosSimulatorArm64()
 
-    iosSimulatorArm64 {
-        binaries.framework {
+    // watchOS Targets
+    val watchosArm32 = watchosArm32()
+    val watchosArm64 = watchosArm64()
+    val watchosX64 = watchosX64()
+    val watchosDeviceArm64 = watchosDeviceArm64()
+    val watchosSimulatorArm64 = watchosSimulatorArm64()
+
+
+    val appleTargets = listOf(
+        iosX64,
+        iosArm64,
+        iosSimulatorArm64,
+        watchosArm32,
+        watchosArm64,
+        watchosX64,
+        watchosDeviceArm64,
+        watchosSimulatorArm64
+    )
+
+    appleTargets.forEach {
+        it.binaries.framework {
             baseName = xcfName
+            xcfFramework.add(this)
         }
     }
 
@@ -82,15 +99,26 @@ kotlin {
             }
         }
 
-        iosMain {
-            dependencies {
-                // Add iOS-specific dependencies here. This a source set created by Kotlin Gradle
-                // Plugin (KGP) that each specific iOS target (e.g., iosX64) depends on as
-                // part of KMP’s default source set hierarchy. Note that this source set depends
-                // on common by default and will correctly pull the iOS artifacts of any
-                // KMP dependencies declared in commonMain.
-            }
+        val iosMain by creating {
+            dependsOn(commonMain.get())
+            dependencies { /* iOS-specific dependencies */ }
         }
+        // SourceSet-urile specifice arhitecturilor iOS (create de target-uri) depind de iosMain.
+        getByName("iosX64Main").dependsOn(iosMain)
+        getByName("iosArm64Main").dependsOn(iosMain)
+        getByName("iosSimulatorArm64Main").dependsOn(iosMain)
+
+        val watchosMain by creating {
+            dependsOn(commonMain.get())
+            dependencies { /* watchOS-specific dependencies */ }
+        }
+        // Conectarea explicită a sourceSet-urilor specifice arhitecturilor watchOS la watchosMain
+        getByName("watchosArm32Main").dependsOn(watchosMain)
+        getByName("watchosArm64Main").dependsOn(watchosMain)
+        getByName("watchosX64Main").dependsOn(watchosMain)
+        getByName("watchosDeviceArm64Main").dependsOn(watchosMain)
+        getByName("watchosSimulatorArm64Main").dependsOn(watchosMain)
+
     }
 
 }
