@@ -7,6 +7,12 @@ plugins {
 
 kotlin {
 
+    // It needs a target compatible with wasmJs, or wasmJs itself
+    wasmJs {
+        browser() // Or nodejs()
+        binaries.executable() // If it's an executable Wasm module
+    }
+
     androidLibrary {
         namespace = "com.task.businesslogicshared"
         compileSdk = 35
@@ -91,11 +97,9 @@ kotlin {
             }
         }
 
-        val wearAppMain by creating {
-            dependsOn(commonMain.get())
-            // It can also depend on androidMain if Wear OS actuals extend/use generic Android ones
-            // dependsOn(androidMain) // Uncomment if wearApp actuals build upon androidMain actuals
-            // dependencies { /* Wear OS specific KMP dependencies */ }
+        wasmJsMain  {
+            dependencies {
+            }
         }
 
         getByName("androidDeviceTest") {
