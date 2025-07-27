@@ -81,6 +81,7 @@ kotlin {
                 // Add KMP dependencies here
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.bundles.ktorCommon)
+                implementation(libs.koin.core)
             }
         }
 
@@ -95,6 +96,8 @@ kotlin {
                 // Add Android-specific dependencies here. Note that this source set depends on
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
+                implementation(libs.androidx.lifecycle.viewmodel)
+                implementation(libs.lifecycle.viewmodel.ktx)
                 implementation(libs.ktorAndroid)
             }
         }
@@ -118,7 +121,8 @@ kotlin {
             dependencies {
                 /* iOS-specific dependencies */
                 implementation(libs.ktoriOS)
-                
+                implementation(libs.koin.core)
+
             }
         }
         // SourceSet-urile specifice arhitecturilor iOS (create de target-uri) depind de iosMain.
