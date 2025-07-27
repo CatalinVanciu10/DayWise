@@ -25,6 +25,7 @@ composeMaterial = "1.2.1"
 composeFoundation = "1.2.1"
 wearToolingPreview = "1.0.0"
 coreSplashscreen = "1.0.1"
+ktor = "3.2.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -63,6 +64,11 @@ androidx-compose-material = { group = "androidx.wear.compose", name = "compose-m
 androidx-compose-foundation = { group = "androidx.wear.compose", name = "compose-foundation", version.ref = "composeFoundation" }
 androidx-wear-tooling-preview = { group = "androidx.wear", name = "wear-tooling-preview", version.ref = "wearToolingPreview" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-content-negociation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktorAndroid = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktoriOS = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -76,3 +82,4 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 [bundles]
 compottie = [ "compottie", "compottie-dot", "compottie-network", "compottie-resources" ]
 koin = [ "koin-core", "koin-compose", "koin-compose-viewmodel", "koin-compose-viewmodel-navigation" ]
+ktorCommon = [ "ktor-client-core", "ktor-client-content-negociation", "ktor-client-json" ]

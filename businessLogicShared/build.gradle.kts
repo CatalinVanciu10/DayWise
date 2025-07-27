@@ -78,8 +78,9 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.kotlin.stdlib)
                 // Add KMP dependencies here
+                implementation(libs.kotlin.stdlib)
+                implementation(libs.bundles.ktorCommon)
             }
         }
 
@@ -94,11 +95,13 @@ kotlin {
                 // Add Android-specific dependencies here. Note that this source set depends on
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
+                implementation(libs.ktorAndroid)
             }
         }
 
         wasmJsMain  {
             dependencies {
+
             }
         }
 
@@ -112,7 +115,11 @@ kotlin {
 
         val iosMain by creating {
             dependsOn(commonMain.get())
-            dependencies { /* iOS-specific dependencies */ }
+            dependencies {
+                /* iOS-specific dependencies */
+                implementation(libs.ktoriOS)
+                
+            }
         }
         // SourceSet-urile specifice arhitecturilor iOS (create de target-uri) depind de iosMain.
         getByName("iosX64Main").dependsOn(iosMain)
