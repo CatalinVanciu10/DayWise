@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -82,6 +83,11 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.bundles.ktorCommon)
                 implementation(libs.koin.core)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.json)
+                implementation(libs.ktor.client.content.negociation)
+                implementation(libs.ktor.cio)
+                implementation(libs.kotlinx.serialization.json)
             }
         }
 
@@ -98,7 +104,7 @@ kotlin {
                 // dependencies declared in commonMain.
                 implementation(libs.androidx.lifecycle.viewmodel)
                 implementation(libs.lifecycle.viewmodel.ktx)
-                implementation(libs.ktorAndroid)
+                implementation(libs.ktor.client.android)
             }
         }
 
@@ -121,6 +127,7 @@ kotlin {
             dependencies {
                 /* iOS-specific dependencies */
                 implementation(libs.ktoriOS)
+                implementation(libs.ktor.client.darwin)
                 implementation(libs.koin.core)
 
             }

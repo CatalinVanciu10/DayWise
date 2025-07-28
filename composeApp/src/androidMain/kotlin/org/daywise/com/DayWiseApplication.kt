@@ -1,7 +1,6 @@
 package org.daywise.com
 
 import android.app.Application
-import com.task.businesslogicshared.di.androidModule
 import com.task.businesslogicshared.di.businessModule
 import org.daywise.com.di.AppModule
 import org.koin.core.context.startKoin
@@ -12,7 +11,7 @@ class DayWiseApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@DayWiseApplication)
-            modules(AppModule.appModule + businessModule + androidModule)
+            modules(listOf(AppModule.appModule, businessModule))
         }
     }
 }

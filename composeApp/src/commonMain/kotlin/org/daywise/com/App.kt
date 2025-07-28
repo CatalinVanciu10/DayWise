@@ -18,6 +18,7 @@ import io.github.alexzhirkevich.compottie.Compottie
 import io.github.alexzhirkevich.compottie.LottieCompositionSpec
 import io.github.alexzhirkevich.compottie.rememberLottieComposition
 import io.github.alexzhirkevich.compottie.rememberLottiePainter
+import org.daywise.com.weather.WeatherScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 @OptIn(ExperimentalResourceApi::class)
@@ -49,6 +50,7 @@ fun App() {
                         contentDescription = "Lottie animation"
                     )
                 }
+                WeatherScreen()
             }
         }
     }
