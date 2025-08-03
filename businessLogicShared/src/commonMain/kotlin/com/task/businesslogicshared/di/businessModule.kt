@@ -1,8 +1,11 @@
 package com.task.businesslogicshared.di
 
 import com.task.businesslogicshared.data.network.ApiService
+import com.task.businesslogicshared.data.repository.GeminiRepositoryImpl
 import com.task.businesslogicshared.data.repository.WeatherRepositoryImpl
+import com.task.businesslogicshared.domain.repository.GeminiRepository
 import com.task.businesslogicshared.domain.repository.WeatherRepository
+import com.task.businesslogicshared.domain.usecase.GetDressingAdviceUseCase
 import com.task.businesslogicshared.domain.usecase.GetWeatherUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -20,5 +23,7 @@ val businessModule = module {
     }
     single { ApiService(get()) }
     single<WeatherRepository> { WeatherRepositoryImpl(get()) }
+    single<GeminiRepository> { GeminiRepositoryImpl(get()) }
     single { GetWeatherUseCase(get()) }
+    single { GetDressingAdviceUseCase(get()) }
 }
