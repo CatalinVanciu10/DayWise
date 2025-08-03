@@ -2,6 +2,7 @@ package org.daywise.com.weather
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,16 +33,20 @@ fun WeatherScreen(viewModel: WeatherViewModel = koinViewModel()) {
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                val weather = (state as WeatherUiState.Success).weather
-                Text(text = weather.city)
-                Text(text = weather.description)
-                Text(text = weather.temperatureCelsius.toString())
+                Text(
+                    text = "AI Advice: ${(state as WeatherUiState.Success).geminiResult}",
+                    style = MaterialTheme.typography.body1
+                )
+//                val weather = (state as WeatherUiState.Success).weather
+//                Text(text = weather.city)
+//                Text(text = weather.description)
+//                Text(text = weather.temperatureCelsius.toString())
             }
-            println("cata test: WEATHER SUCCESS")
+            println("cata test: GEMINI SUCCESS")
         }
 
         is WeatherUiState.Error -> {
-            println("cata test: WEATHER FAILED: ${(state as WeatherUiState.Error).message}")
+            println("cata test: GEMINI FAILED: ${(state as WeatherUiState.Error).message}")
         }
     }
 

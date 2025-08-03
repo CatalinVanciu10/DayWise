@@ -8,6 +8,6 @@ import org.koin.dsl.module
 object AppModule {
     val appModule = module {
         single { Greeting().greet() }
-        viewModel { WeatherViewModel(get()) }
+        viewModel { WeatherViewModel(get(), get()) }
     }
 }
