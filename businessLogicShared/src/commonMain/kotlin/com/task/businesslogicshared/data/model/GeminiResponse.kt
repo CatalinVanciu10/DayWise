@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GeminiResponse(
-    val candidates: List<Candidate>,
-    val promptFeedback: PromptFeedback? = null
+    val candidates: List<Candidate> = listOf(),
+    val promptFeedback: PromptFeedback? = PromptFeedback(listOf())
 )

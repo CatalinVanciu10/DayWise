@@ -1,14 +1,13 @@
 package org.daywise.com
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,33 +28,33 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 @Preview
 fun App() {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                text = "Platform: ${platform()}"
-            )
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    val composition by rememberLottieComposition {
-                        LottieCompositionSpec.JsonString(
-                            Res.readBytes("files/rain_animation.json").decodeToString()
-                        )
-                    }
+//        var showContent by remember { mutableStateOf(false) }
+//        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+//            Text(
+//                text = "Platform: ${platform()}"
+//            )
+//            Button(onClick = { showContent = !showContent }) {
+//                Text("Click me!")
+//            }
+//            AnimatedVisibility(showContent) {
+//                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+//                    val composition by rememberLottieComposition {
+//                        LottieCompositionSpec.JsonString(
+//                            Res.readBytes("files/rain_animation.json").decodeToString()
+//                        )
+//                    }
+//
+////                    Image(
+////                        painter = rememberLottiePainter(
+////                            composition = composition,
+////                            iterations = Compottie.IterateForever
+////                        ),
+////                        contentDescription = "Lottie animation"
+////                    )
+//                    Spacer(modifier = Modifier.padding(16.dp))     }
 
-                    Image(
-                        painter = rememberLottiePainter(
-                            composition = composition,
-                            iterations = Compottie.IterateForever
-                        ),
-                        contentDescription = "Lottie animation"
-                    )
-                    Spacer(modifier = Modifier.padding(16.dp))
-                    WeatherScreen()
-                }
-            }
+        DayWiseTheme {
+            WeatherScreen()
         }
     }
 }
