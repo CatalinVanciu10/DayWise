@@ -20,6 +20,9 @@ import io.github.alexzhirkevich.compottie.Compottie
 import io.github.alexzhirkevich.compottie.LottieCompositionSpec
 import io.github.alexzhirkevich.compottie.rememberLottieComposition
 import io.github.alexzhirkevich.compottie.rememberLottiePainter
+import org.daywise.com.permissions.NotificationManager
+import org.daywise.com.permissions.NotificationScreen
+import org.daywise.com.permissions.rememberNotificationManager
 import org.daywise.com.weather.WeatherScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
@@ -54,7 +57,13 @@ fun App() {
 //                    Spacer(modifier = Modifier.padding(16.dp))     }
 
         DayWiseTheme {
-            WeatherScreen()
+            val manager = rememberNotificationManager()
+//            WeatherScreen()
         }
     }
+}
+
+@Composable
+fun TestNotification(manager: NotificationManager) {
+    NotificationScreen(manager)
 }
