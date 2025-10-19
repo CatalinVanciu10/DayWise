@@ -33,15 +33,13 @@ class AndroidNotificationManager(
     override fun showLocalNotification(title: String, message: String) {
         val channelId = "default_channel"
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
-                "Local Notifications",
-                android.app.NotificationManager.IMPORTANCE_DEFAULT
-            )
-            val manager = context.getSystemService(android.app.NotificationManager::class.java)
-            manager.createNotificationChannel(channel)
-        }
+        val channel = NotificationChannel(
+            channelId,
+            "Local Notifications",
+            android.app.NotificationManager.IMPORTANCE_DEFAULT
+        )
+        val manager = context.getSystemService(android.app.NotificationManager::class.java)
+        manager.createNotificationChannel(channel)
 
         val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(android.R.drawable.ic_dialog_info)

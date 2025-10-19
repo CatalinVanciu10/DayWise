@@ -15,14 +15,6 @@ import androidx.compose.ui.unit.dp
 import com.task.businesslogicshared.platform
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-import daywise.composeapp.generated.resources.Res
-import io.github.alexzhirkevich.compottie.Compottie
-import io.github.alexzhirkevich.compottie.LottieCompositionSpec
-import io.github.alexzhirkevich.compottie.rememberLottieComposition
-import io.github.alexzhirkevich.compottie.rememberLottiePainter
-import org.daywise.com.permissions.NotificationManager
-import org.daywise.com.permissions.NotificationScreen
-import org.daywise.com.permissions.rememberNotificationManager
 import org.daywise.com.weather.WeatherScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
@@ -57,13 +49,7 @@ fun App() {
 //                    Spacer(modifier = Modifier.padding(16.dp))     }
 
         DayWiseTheme {
-            val manager = rememberNotificationManager()
-//            WeatherScreen()
+            WeatherScreen()
         }
     }
-}
-
-@Composable
-fun TestNotification(manager: NotificationManager) {
-    NotificationScreen(manager)
 }
