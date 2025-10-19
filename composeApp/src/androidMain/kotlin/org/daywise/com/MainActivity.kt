@@ -1,5 +1,6 @@
 package org.daywise.com
 
+import android.Manifest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,11 +15,24 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val launcher =
+        val calendarLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+
             }
 
-        val notificationManager = AndroidNotificationManager(this, launcher)
+        val notificationLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+                if(!granted) {
+                    println("❌ Notification permission denied")
+                    calendarLauncher.launch(Manifest.permission.READ_CALENDAR)
+                } else {
+                    println("✅ Notification permission granted")
+                    calendarLauncher.launch(Manifest.permission.READ_CALENDAR)
+                }
+            }
+
+        val notificationManager = AndroidNotificationManager(this, notificationLauncher)
+
 
         setContent {
             LaunchedEffect(Unit) {
