@@ -1,5 +1,6 @@
 package org.daywise.com.calendar
 
+import platform.EventKit.EKEntityType
 import platform.EventKit.EKEvent
 import platform.EventKit.EKEventStore
 import platform.Foundation.NSCalendar
@@ -14,12 +15,12 @@ class IosCalendarManager : CalendarManager {
     override suspend fun getUpcomingEvents(): List<CalendarEvent> {
         val calendar = NSCalendar.currentCalendar
         val now = NSDate()
-        val oneWeek = calendar.dateByAddingUnit(NSCalendarUnitDay, 7, now, 0)!!
+        val oneWeek = calendar.dateByAddingUnit(NSCalendarUnitDay, 7, now, 0uL)!!
 
         val predicate = eventStore.predicateForEventsWithStartDate(
             startDate = now,
             endDate = oneWeek,
-            calendars = eventStore.calendarsForEntityType(EKEntityTypeEvent)
+            calendars = eventStore.calendarsForEntityType(EKEntityType.EKEntityTypeEvent)
         )
 
         val events = eventStore.eventsMatchingPredicate(predicate) as? List<EKEvent> ?: emptyList()
